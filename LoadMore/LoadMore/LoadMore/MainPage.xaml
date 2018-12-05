@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:SfListViewSample"
+             x:Class="SfListViewSample.MainPage"
+             xmlns:helper="clr-namespace:Syncfusion.ListView.XForms.Helpers;assembly=Syncfusion.SfListView.XForms"
+             xmlns:syncfusion="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <helper:InverseBoolConverter x:Key="inverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Text="Enable/Disable load more" Grid.Row="0" Command="{Binding BindingContext.LoadMoreEnableCommand,Source={x:Reference Name=listView}}" CommandParameter="{Binding .,Source={x:Reference Name=listView}}"/>
+        <syncfusion:SfListView x:Name="listView" 
+                               Grid.Row="1"
+                               ItemSize="120"
+                               LoadMoreOption="{Binding EnableLoadMore}"
+                               LoadMoreCommand="{Binding LoadMoreItemsCommand}"
+                               LoadMoreCommandParameter="{Binding Source={x:Reference Name=listView}}"
+                               IsBusy="{Binding IsBusy}"
+                               ItemsSource="{Binding Products}">
+
+            <syncfusion:SfListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid HeightRequest="120" Margin="0" Padding="0" RowSpacing="0" BackgroundColor="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Grid Padding="0" ColumnSpacing="0" Margin="16">
+                            <Grid.Margin>
+                                <OnPlatform x:TypeArguments="Thickness">
+                                    <OnPlatform.Android>16</OnPlatform.Android>
+                                    <OnPlatform.iOS>15,12,15,12</OnPlatform.iOS>
+                                    <OnPlatform.WinPhone>15,12,15,12</OnPlatform.WinPhone>
+                                </OnPlatform>
+                            </Grid.Margin>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.4*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Image Source="{Binding Image}" Aspect="AspectFit" VerticalOptions="Center" HorizontalOptions="Center" />
+                            <Grid Grid.Column="1" Padding="0" RowSpacing="0">
+                                <Grid.Margin>
+                                    <OnPlatform x:TypeArguments="Thickness">
+                                        <OnPlatform.Android>16,0,0,0</OnPlatform.Android>
+                                        <OnPlatform.iOS>12,0,0,0</OnPlatform.iOS>
+                                        <OnPlatform.WinPhone>12,0,0,0</OnPlatform.WinPhone>
+                                    </OnPlatform>
+                                </Grid.Margin>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label Text="{Binding Name}" HorizontalOptions="Start" Margin="0,0,0,4" FontSize="16">
+                                    <Label.Opacity>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <OnPlatform.Android>0.87</OnPlatform.Android>
+                                            <OnPlatform.iOS>1</OnPlatform.iOS>
+                                            <OnPlatform.WinPhone>1</OnPlatform.WinPhone>
+                                        </OnPlatform>
+                                    </Label.Opacity>
+                                    <Label.TextColor>
+                                        <OnPlatform x:TypeArguments="Color">
+                                            <OnPlatform.Android>#000000</OnPlatform.Android>
+                                            <OnPlatform.iOS>#333333</OnPlatform.iOS>
+                                            <OnPlatform.WinPhone>#333333</OnPlatform.WinPhone>
+                                        </OnPlatform>
+                                    </Label.TextColor>
+                                </Label>
+                                <Label Text="{Binding Weight}" FontSize="14" Grid.Row="1" HorizontalOptions="Start">
+                                    <Label.TextColor>
+                                        <OnPlatform x:TypeArguments="Color">
+                                            <OnPlatform.Android>#000000</OnPlatform.Android>
+                                            <OnPlatform.iOS>#757575</OnPlatform.iOS>
+                                            <OnPlatform.WinPhone>#4C4C4C</OnPlatform.WinPhone>
+                                        </OnPlatform>
+                                    </Label.TextColor>
+                                    <Label.Opacity>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <OnPlatform.Android>0.54</OnPlatform.Android>
+                                            <OnPlatform.iOS>1</OnPlatform.iOS>
+                                            <OnPlatform.WinPhone>1</OnPlatform.WinPhone>
+                                        </OnPlatform>
+                                    </Label.Opacity>
+                                </Label>
+
+                                <Grid Grid.Row="2" Padding="0" ColumnSpacing="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Label Text="{Binding Price}" VerticalOptions="Start" FontAttributes="Bold" 
+                                               HorizontalOptions="Start" FontSize="16">
+                                        <Label.TextColor>
+                                            <OnPlatform x:TypeArguments="Color">
+                                                <OnPlatform.Android>#009688</OnPlatform.Android>
+                                                <OnPlatform.iOS>#1C73F2</OnPlatform.iOS>
+                                                <OnPlatform.WinPhone>#0078D7</OnPlatform.WinPhone>
+                                            </OnPlatform>
+                                        </Label.TextColor>
+                                        <Label.Margin>
+                                            <OnPlatform x:TypeArguments="Thickness">
+                                                <OnPlatform.Android>0,16,0,0</OnPlatform.Android>
+                                                <OnPlatform.iOS>0,12,0,0</OnPlatform.iOS>
+                                                <OnPlatform.WinPhone>0,12,0,0</OnPlatform.WinPhone>
+                                            </OnPlatform>
+                                        </Label.Margin>
+                                    </Label>
+                                    <Button Grid.Column="1" x:Name="addButton" FontSize="16" Text="ADD" BorderWidth="1"  WidthRequest="80"
+                                                VerticalOptions="CenterAndExpand" HorizontalOptions="End" >
+                                        <Button.BackgroundColor>
+                                            <OnPlatform x:TypeArguments="Color">
+                                                <OnPlatform.Android>#009688</OnPlatform.Android>
+                                                <OnPlatform.iOS>#FFFFFF</OnPlatform.iOS>
+                                                <OnPlatform.WinPhone>#C9C9C9</OnPlatform.WinPhone>
+                                            </OnPlatform>
+                                        </Button.BackgroundColor>
+                                        <Button.BorderColor>
+                                            <OnPlatform x:TypeArguments="Color">
+                                                <OnPlatform.Android>#009688</OnPlatform.Android>
+                                                <OnPlatform.iOS>#1C73F2</OnPlatform.iOS>
+                                                <OnPlatform.WinPhone>#C9C9C9</OnPlatform.WinPhone>
+                                            </OnPlatform>
+                                        </Button.BorderColor>
+                                        <Button.TextColor>
+                                            <OnPlatform x:TypeArguments="Color">
+                                                <OnPlatform.Android>#FFFFFF</OnPlatform.Android>
+                                                <OnPlatform.iOS>#1C73F2</OnPlatform.iOS>
+                                                <OnPlatform.WinPhone>#000000</OnPlatform.WinPhone>
+                                            </OnPlatform>
+                                        </Button.TextColor>
+                                    </Button>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                        <BoxView x:Name="boxView" Grid.Row="1" BackgroundColor="#EAEAEA"/>
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.ItemTemplate>
+            <syncfusion:SfListView.LoadMoreTemplate>
+                <DataTemplate>
+                    <Grid HeightRequest="40">
+                        <Label Text="Load More Items" TextColor="Black" BackgroundColor="AliceBlue"
+                           HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                           IsVisible="{Binding IsBusy, Converter={StaticResource inverseBoolConverter}}" />
+                        <syncfusion:LoadMoreIndicator Color="Red" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" VerticalOptions="Center"/>
+                    </Grid>
+                </DataTemplate>
+            </syncfusion:SfListView.LoadMoreTemplate>
+        </syncfusion:SfListView>
+    </Grid>
+</ContentPage>
