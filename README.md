@@ -1,7 +1,7 @@
 # How-to-enable-load-more-after-loading-in-xamarin-forms-listview
-This example demonstrates to enable load more after loading in Xamarin.Forms ListView.
+This example demonstrates to enable load more after loading in Xamarin.Forms ListView by setting the LoadMoreOption as none initially and change it at run time.
 
-See [How to enable load more after loading in Xamarin.Forms ListView]() for more details.
+See [How to enable load more after loading in Xamarin.Forms ListView](https://www.syncfusion.com/kb/9953/how-to-enable-load-more-after-loading-in-xamarin-forms-listview) for more details.
 ## <a name="requirements-to-run-the-demo"></a>Requirements to run the demo ##
 
 * [Visual Studio 2017](https://visualstudio.microsoft.com/downloads/) or [Visual Studio for Mac](https://visualstudio.microsoft.com/vs/mac/).
